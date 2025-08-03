@@ -1,4 +1,4 @@
-from typing import TypedDict, Union, cast, Protocol
+from typing import TypedDict, cast, Protocol
 from langchain_core.messages import HumanMessage, AIMessage
 from langchain_openai import ChatOpenAI
 from langchain_ollama import ChatOllama
@@ -9,9 +9,9 @@ from dotenv import load_dotenv
 _ = load_dotenv()
 
 class AgentState(TypedDict):
-    messages: List[Union[HumanMessage,AIMessage]]
+    messages: list[HumanMessage | AIMessage]
 
-llm = ChatOpenAI(model='gpt-4o')
+# llm = ChatOpenAI(model='gpt-4o')
 llma = ChatOllama(model='gemma:2b')
 
 def process(state: AgentState)->AgentState:
@@ -27,7 +27,7 @@ graph.add_node('process', process)
 graph.add_edge(START, 'process')
 graph.add_edge('process', END)
 agent = graph.compile()
-conversation_history: list[ Union[HumanMessage , AIMessage]] = []
+conversation_history: list[HumanMessage | AIMessage] = []
 user_input = input('Enter: ')
 while True:
     conversation_history.append(HumanMessage(content=user_input))
