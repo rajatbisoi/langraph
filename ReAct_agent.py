@@ -25,7 +25,7 @@ def sub(a: int, b:int)->int:
 
 tools= [add,sub]
 
-llma = ChatOllama(model='qwen2.5-coder:7b-instruct-q4_K_M').bind_tools(tools)
+llma = ChatOllama(model='qwen2.5:0.5B').bind_tools(tools)
 
 def model_call(state: AgentState)->AgentState:
     system_prompt = SystemMessage(content=
@@ -76,6 +76,6 @@ def print_stream(stream):
         else:
             message.pretty_print()
 
-inputs = {'messages': [('user', "add 4 and 5 then sub 9 and 2  then add both results")]}
+inputs = {'messages': [('user', "add 4 and 5 and sub 9 and 2  then add both results and give output in json format and no other comments")]}
 
 print_stream(app.stream(inputs, stream_mode='values'))
