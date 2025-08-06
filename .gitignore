@@ -1,1 +1,4 @@
 .env
+.venv
+.vscode
+cutu_message.txt
